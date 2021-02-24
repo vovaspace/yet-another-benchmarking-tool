@@ -1,0 +1,45 @@
+{
+  "name": "yet-another-benchmarking-tool",
+  "version": "1.0.0",
+  "description": "Yet another benchmarking tool for Node and Browser",
+  "main": "./lib/index.node.js",
+  "browser": "./lib/index.browser.js",
+  "typings": "./lib/typings/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run build:node && npm run build:browser && npm run build:typings",
+    "build:node": "esbuild src/index.ts --bundle --platform=node --format=esm --define:process.env.IS_BROWSER_ENV=false --outfile=lib/index.node.js",
+    "build:browser": "esbuild src/index.ts --bundle --platform=browser --format=cjs --define:process.env.IS_BROWSER_ENV=true --outfile=lib/index.browser.js",
+    "build:typings": "tsc -p ./tsconfig.typings.json",
+    "clean": "rimraf ./lib",
+    "code:lint": "prettier --check . && eslint .",
+    "code:fix": "prettier --write . && eslint . --fix"
+  },
+  "license": "ISC",
+  "author": "Vladimir Lewandowski <me@vovaspace.com> (https://vovaspace.com/)",
+  "homepage": "https://github.com/vovaspace/yet-another-benchmarking-tool",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vovaspace/yet-another-benchmarking-tool.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vovaspace/yet-another-benchmarking-tool/issues"
+  },
+  "dependencies": {
+    "chalk": "^4.1.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.14.2",
+    "esbuild": "^0.8.43",
+    "eslint": "^7.19.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.1.3"
+  }
+}

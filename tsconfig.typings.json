@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "removeComments": false,
+    "declaration": true,
+    "declarationDir": "./lib/typings",
+    "emitDeclarationOnly": true
+  }
+}
