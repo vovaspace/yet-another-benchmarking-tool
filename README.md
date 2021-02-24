@@ -1,7 +1,5 @@
 # Yet Another Benchmarking Tool
 
-## Overview
-
 A `Benchmark` is a set of `Suites` which are sets of `Cases`.
 
 When running a `Benchmark`, each `Case` is run several times.
@@ -18,7 +16,7 @@ npm install yet-another-benchmarking-tool
 
 Using Yarn:
 
-```
+```bash
 yarn add yet-another-benchmarking-tool
 ```
 
