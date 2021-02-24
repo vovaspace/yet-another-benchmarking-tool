@@ -36,12 +36,10 @@ export class Suite {
     this.cache = {};
     this.output.onSuiteRun(this);
 
-    for await (const [index, testCase] of this.cases.entries()) {
+    for await (const testCase of this.cases) {
+      this.output.onCaseCooldown(testCase);
+      await cooldown(this.configuration.caseCooldown);
       await testCase.run();
-      if (index < this.cases.length - 1) {
-        this.output.onCaseCooldown(testCase);
-        await cooldown(this.configuration.caseCooldown);
-      }
     }
 
     this.output.onSuiteDone(this);
