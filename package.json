@@ -1,6 +1,6 @@
 {
   "name": "yet-another-benchmarking-tool",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Yet another benchmarking tool for Node and Browser.",
   "main": "./lib/index.node.js",
   "browser": "./lib/index.browser.js",
