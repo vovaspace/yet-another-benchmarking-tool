@@ -27,6 +27,13 @@
   "bugs": {
     "url": "https://github.com/vovaspace/yet-another-benchmarking-tool/issues"
   },
+  "keywords": [
+    "benchmark",
+    "benchmarking",
+    "performance",
+    "perf",
+    "speed"
+  ],
   "dependencies": {
     "chalk": "^4.1.0"
   },
