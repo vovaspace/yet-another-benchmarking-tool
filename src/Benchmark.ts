@@ -4,9 +4,9 @@ import { cooldown } from './cooldown';
 
 export interface BenchmarkConfiguration {
   caseRunsCount: number;
-  suiteCooldown: number;
-  caseCooldown: number;
-  runCooldown: number;
+  suiteCooldown: number | 'disabled';
+  caseCooldown: number | 'disabled';
+  runCooldown: number | 'disabled';
 }
 
 export class Benchmark {
@@ -35,9 +35,12 @@ export class Benchmark {
   public async run() {
     for await (const [index, suite] of this.suites.entries()) {
       await suite.run();
-      if (index < this.suites.length - 1) {
-        this.output.onSuiteCooldown(suite);
-        await cooldown(this.configuration.suiteCooldown);
+
+      if (this.configuration.suiteCooldown !== 'disabled') {
+        if (index < this.suites.length - 1) {
+          this.output.onSuiteCooldown(suite);
+          await cooldown(this.configuration.suiteCooldown);
+        }
       }
     }
 

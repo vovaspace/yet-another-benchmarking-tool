@@ -36,6 +36,8 @@ export class Output {
   }
 
   public onCaseCooldown(testCase: Case): void {
+    if (testCase.configuration.caseCooldown === 'disabled') return;
+
     this.logger.message(
       `for ${(testCase.configuration.caseCooldown / 1000).toFixed(2)}s`,
       {
@@ -64,6 +66,8 @@ export class Output {
   }
 
   public onSuiteCooldown(suite: Suite): void {
+    if (suite.configuration.suiteCooldown === 'disabled') return;
+
     this.logger.message(
       `for ${(suite.configuration.suiteCooldown / 1000).toFixed(2)}s`,
       {

@@ -37,8 +37,11 @@ export class Suite {
     this.output.onSuiteRun(this);
 
     for await (const testCase of this.cases) {
-      this.output.onCaseCooldown(testCase);
-      await cooldown(this.configuration.caseCooldown);
+      if (this.configuration.caseCooldown !== 'disabled') {
+        this.output.onCaseCooldown(testCase);
+        await cooldown(this.configuration.caseCooldown);
+      }
+
       await testCase.run();
     }
 
