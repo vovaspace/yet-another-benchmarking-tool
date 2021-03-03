@@ -8,15 +8,9 @@ When running a `Benchmark`, each `Case` is run several times.
 
 ## Installation
 
-Using NPM:
-
 ```bash
 npm install yet-another-benchmarking-tool
-```
-
-Using Yarn:
-
-```bash
+# or
 yarn add yet-another-benchmarking-tool
 ```
 
@@ -40,12 +34,7 @@ const suite = new Suite("Checking for 'o' letter", [
 Then, create a benchmark:
 
 ```js
-const benchmark = new Benchmark([suite], {
-  caseRunsCount: 10_000,
-  suiteCooldown: 8_000,
-  caseCooldown: 2_000,
-  runCooldown: 0,
-});
+const benchmark = new Benchmark([suite]);
 ```
 
 And run:
@@ -54,6 +43,6 @@ And run:
 benchmark.run();
 ```
 
-# Output
+Output:
 
 ![output example](./output.jpg)

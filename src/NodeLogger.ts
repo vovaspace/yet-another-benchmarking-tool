@@ -9,23 +9,19 @@ export class NodeLogger extends Logger {
   ): string {
     const bg: Record<typeof type, typeof BackgroundColor> = {
       neutral: 'bgWhite',
-      running: 'bgCyan',
-      done: 'bgGreen',
+      success: 'bgGreen',
     };
 
     return `${chalk.black[bg[type]].bold(` ${text} `)} `;
   }
 
-  public message(text: string, options: Partial<LogOptions> = {}) {
-    const { tab, bold, head, headType } = {
-      ...NodeLogger.defaultLogOptions,
-      ...options,
-    };
+  public message(text: string | null, options: Partial<LogOptions> = {}) {
+    const { head, headType } = options;
 
     this.out.log(
-      `${NodeLogger.tab(tab)}${
-        head ? NodeLogger.head(head, headType ?? 'neutral') : ''
-      }${bold ? chalk.bold(text) : text}`,
+      `${head ? NodeLogger.head(head, headType ?? 'neutral') : ''}${
+        text ?? ''
+      }`,
     );
   }
 }

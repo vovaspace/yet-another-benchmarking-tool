@@ -18,8 +18,6 @@
         "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
         "allowSeparatedGroups": true
       }
-    ],
-    "max-classes-per-file": "off",
-    "no-restricted-syntax": "off"
+    ]
   }
 }

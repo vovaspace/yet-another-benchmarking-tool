@@ -7,28 +7,19 @@ export class BrowserLogger extends Logger {
   ): [string, string] {
     const bg: Record<typeof type, string> = {
       neutral: 'color: black; background-color: white; font-weight: bold;',
-      running: 'color: black; background-color: cyan; font-weight: bold;',
-      done: 'color: black; background-color: chartreuse; font-weight: bold;',
+      success: 'color: black; background-color: chartreuse; font-weight: bold;',
     };
 
     return [`%c ${text} %c `, `${bg[type]}`];
   }
 
-  public message(text: string, options: Partial<LogOptions> = {}) {
-    const { tab, bold, head, headType } = {
-      ...BrowserLogger.defaultLogOptions,
-      ...options,
-    };
+  public message(text: string | null, options: Partial<LogOptions> = {}) {
+    const { head, headType } = options;
 
     const [headString, headStyles] = head
       ? BrowserLogger.head(head, headType ?? 'neutral')
       : ['%c%c', ''];
 
-    this.out.log(
-      `${BrowserLogger.tab(tab)}${headString}${bold ? `%c${text}` : text}`,
-      headStyles,
-      '',
-      bold ? 'font-weight: bold;' : '',
-    );
+    this.out.log(`${headString}${text ?? ''}`, headStyles, '');
   }
 }
