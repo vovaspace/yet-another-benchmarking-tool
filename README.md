@@ -9,40 +9,49 @@ When running a `Benchmark`, each `Case` is run several times.
 ## Installation
 
 ```bash
+# NPM
 npm install yet-another-benchmarking-tool
-# or
+
+# Yarn
 yarn add yet-another-benchmarking-tool
 ```
 
 ## Running
 
-First, import `Yet Another Benchmarking Tool`'s main classes:
+First, configure a suite:
 
 ```js
 import { Benchmark, Suite } from 'yet-another-benchmarking-tool';
-```
 
-Second, configure a suite:
+const testArray = Array(1000).fill('foo');
+testArray[500] = 'baz';
 
-```js
-const suite = new Suite("Checking for 'o' letter", [
-  ['RegExp.test', () => /o/.test('Hello World!')],
-  ['String.indexOf', () => 'Hello World!'.indexOf('o') > -1],
+const suite = new Suite("Checking for some 'baz'", [
+  ['Array.some', () => testArray.some((str) => str === 'baz')],
+  [
+    'for',
+    () => {
+      for (let i = 0, len = testArray.length; i < len; i += 1) {
+        if (testArray[i] === 'baz') return true;
+      }
+      return false;
+    },
+  ],
 ]);
 ```
 
-Then, create a benchmark:
+Second, create a benchmark:
 
 ```js
 const benchmark = new Benchmark([suite]);
 ```
 
-And run:
+Third, run the benchmark:
 
 ```js
 benchmark.run();
 ```
 
-Output:
+Then get the output to the console:
 
 ![output example](./output.jpg)
